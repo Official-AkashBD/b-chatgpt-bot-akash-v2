@@ -1,8 +1,6 @@
-name: Facebook ChatGPT Bot
+name: Run Facebook ChatGPT Bot
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -10,20 +8,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18'   # Node.js ভার্সন
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run Facebook ChatGPT Bot
+      - name: Run bot script
         env:
           FB_EMAIL: ${{ secrets.FB_EMAIL }}
           FB_PASSWORD: ${{ secrets.FB_PASSWORD }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node index.js
+          FB_SESSION: ${{ secrets.FB_SESSION }}
+        run: node index.js   # এখানে তোমার মেইন স্ক্রিপ্ট ফাইলের নাম দিন
