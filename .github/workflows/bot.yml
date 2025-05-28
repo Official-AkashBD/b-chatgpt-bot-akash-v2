@@ -1,29 +1,29 @@
-name: Run Facebook ChatGPT Bot
+name: Facebook ChatGPT Bot
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run the bot
+      - name: Run bot
         run: node index.js
         env:
           FB_EMAIL: ${{ secrets.FB_EMAIL }}
           FB_PASSWORD: ${{ secrets.FB_PASSWORD }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          FB_SESSION: ${{ secrets.FB_SESSION }}
+          SESSION: ${{ secrets.SESSION }}
